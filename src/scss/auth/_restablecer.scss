@@ -1,0 +1,19 @@
+@use "base/mixins" as m;
+@use "base/variables" as v;
+@import "auth/login";
+.restablecer{
+    @extend .login;
+    .uptask{
+        background:linear-gradient(to right,v.$azul 0%, lighten(v.$azul,30%)100%);
+        color: transparent;
+        background-clip: text;
+    }
+    input[type="submit"]{
+        @include m.boton(v.$azul,v.$blanco);
+    }
+    .acciones{
+        a{
+            color: v.$azul;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+@use "base/mixins" as m;
+@use "base/variables" as v;
+@import "auth/login";
+.mensaje{
+    @extend .login;
+    .uptask{
+        background:linear-gradient(to right,v.$naranja 0%, lighten(v.$naranja,30%)100%);
+        color: transparent;
+        background-clip: text;
+    }
+ 
+}

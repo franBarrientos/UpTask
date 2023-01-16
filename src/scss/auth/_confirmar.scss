@@ -1,0 +1,18 @@
+@use "base/mixins" as m;
+@use "base/variables" as v;
+@import "auth/login";
+.confirmar{
+    @extend .login;
+    .uptask{
+        background:linear-gradient(to right,v.$naranja 0%, lighten(v.$naranja,30%)100%);
+        color: transparent;
+        background-clip: text;
+    }
+    .acciones{
+        justify-content: center;
+        a{
+            @include m.boton(v.$naranja,v.$blanco);
+
+        }
+    }
+}
