@@ -9,6 +9,10 @@
     .principal{
         flex: 1;
         overflow: scroll;
+        
+    }
+    .principal::-webkit-scrollbar {
+        display: none;
     }
     .contenido{
         padding: 2rem;
