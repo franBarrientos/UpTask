@@ -6,6 +6,10 @@
         display: flex;
         align-items: center;
         margin-bottom: 2rem;
+        label{
+            font-size: 2rem;
+            padding: 0 2 0 2rem;
+        }
     }
     label{
         flex: 0 0 10rem;

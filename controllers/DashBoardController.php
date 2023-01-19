@@ -44,10 +44,16 @@ class DashBoardController{
             $usuario->sincronizar($_POST);
             $alertas = $usuario->validar_perfil();
             if(empty($alertas)){
+                $existeUsuario = Usuario::where("email",$usuario->email);
+                if($existeUsuario && $existeUsuario->id != $usuario->id){
+                    Usuario::setAlerta("error","Email no valido, Cuenta ya registrada");
+                }else{
                 $usuario->guardar();
                 Usuario::setAlerta("exito","Guardado Correctamente");
-                $alertas = Usuario::getAlertas();
                 $_SESSION["nombre"] = $usuario->nombre;
+                }
+                $alertas = Usuario::getAlertas();
+
             }
         }
         $router->render("dashboard/perfil",[
@@ -68,5 +74,33 @@ class DashBoardController{
         $router->render("dashboard/proyecto",[
             "titulo" => $titulo
         ]); 
+    }
+    public static function cambiar_password(Router $router){
+        session_start();
+        isAuth();
+        $alertas = [];
+        $usuario = Usuario::find($_SESSION["id"]);
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $passwordActual = $_POST["password_actual"];
+            $passwordNuevo = $_POST["password_nuevo"];
+            $alertas = Usuario::validarNuevosPasswords($passwordNuevo,$passwordActual);
+            if(empty($alertas)){
+                if(password_verify($passwordActual,$usuario->password)){
+                    $usuario->password = $passwordNuevo;
+                    $usuario->hashPassword();
+                    $resultado =$usuario->guardar();
+                    if($resultado){
+                        Usuario::setAlerta("exito","Contraseña Cambiada Correctamnete");
+                    }
+                }else{
+                    Usuario::setAlerta("error","Contraseña Incorrecta");
+                }
+            };
+            $alertas = Usuario::getAlertas();
+        }
+        $router->render("dashboard/cambiar-password",[
+            "titulo" => "Cambiar Password",
+            "alertas" => $alertas
+        ]);
     }
 }
