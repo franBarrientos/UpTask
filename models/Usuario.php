@@ -22,8 +22,8 @@ class Usuario extends ActiveRecord{
         $this->confirmado = $args["confirmado"] ?? 0;
     }
     public function validarNuevaCuenta(){
-        if(!$this->nombre){
-            self::$alertas["error"][]="El nombre del Usuario es Obligatorio";
+        if(!$this->email){
+            self::$alertas["error"][]="El Email del Usuario es Obligatorio";
         }
         if(!$this->email){
             self::$alertas["error"][]="El Email del Usuario es Obligatorio";
@@ -67,6 +67,15 @@ class Usuario extends ActiveRecord{
         }
         if(!strpos($this->email,"@")){
             self::$alertas["error"][]="El email no posee un formato Valido";
+        }
+        return self::$alertas;
+    }
+    public function validar_perfil(){
+        if(!$this->email){
+            self::$alertas["error"][]="El Email del Usuario es Obligatorio";
+        }
+        if(!$this->nombre){
+            self::$alertas["error"][]="El Nombre del Usuario es Obligatorio";
         }
         return self::$alertas;
     }
