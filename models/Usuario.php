@@ -79,4 +79,14 @@ class Usuario extends ActiveRecord{
         }
         return self::$alertas;
     }
+    public static function validarNuevosPasswords($password1 ,$password2){
+        if(!$password1 || strlen($password1) < 6){
+            self::$alertas["error"][]="El Password del Usuario es Obligatorio Y Debe contener al menos 6 caracteres";
+        }
+        if(!$password2 || strlen($password2) < 6){ 
+            self::$alertas["error"][]="El Password del Usuario es Obligatorio Y Debe contener al menos 6 caracteres";
+        }
+        return self::$alertas;
+
+    }
 }

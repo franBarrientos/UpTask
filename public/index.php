@@ -30,6 +30,8 @@ $router->post("/crear-proyecto",[DashBoardController::class,"crear_proyecto"]);
 $router->get("/proyecto",[DashBoardController::class,"proyecto"]);
 $router->get("/perfil",[DashBoardController::class,"perfil"]);
 $router->post("/perfil",[DashBoardController::class,"perfil"]);
+$router->get("/cambiar-password",[DashBoardController::class,"cambiar_password"]);
+$router->post("/cambiar-password",[DashBoardController::class,"cambiar_password"]);
 //API TAREAS
 $router->get("/api/tareas",[TareaController::class,"index"]);
 $router->post("/api/tarea",[TareaController::class,"crear"]);
